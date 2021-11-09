@@ -15,6 +15,7 @@ if (!Directory.Exists(sourceDir))
 {
     await FileTasks.DownloadAndUnzip(cscSourceDownloadLink, sourceDownloadDir);
 }
+System.Console.WriteLine("source dir is: " + sourceDir);
 
 // Benchmark.NET creates a new process to run the benchmark, so the easiest way
 // to communicate information is pass by environment variable

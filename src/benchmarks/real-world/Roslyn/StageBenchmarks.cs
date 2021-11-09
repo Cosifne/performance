@@ -114,14 +114,15 @@ namespace CompilerBenchmarks
             }
 
             _comp.GenerateResourcesAndDocumentationComments(
-                _moduleBeingBuilt,
+                moduleBuilder: _moduleBeingBuilt,
                 xmlDocStream: null,
                 win32Resources: null,
-                _options.OutputNameOverride,
-                diagnostics,
+                useRawWin32Resources: false,
+                outputNameOverride: _options.OutputNameOverride,
+                diagnostics: diagnostics,
                 cancellationToken: default);
 
-            _comp.ReportUnusedImports(null, diagnostics, default);
+            _comp.ReportUnusedImports(diagnostics, default);
             _moduleBeingBuilt.CompilationFinished();
 
             diagnostics.Free();
@@ -138,6 +139,7 @@ namespace CompilerBenchmarks
                 new SimpleEmitStreamProvider(_peStream),
                 metadataPEStreamProvider: null,
                 pdbStreamProvider: null,
+                rebuildData: null,
                 testSymWriterFactory: null,
                 diagnostics,
                 _options,
